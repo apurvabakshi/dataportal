@@ -1,0 +1,106 @@
+<html ng-app="loginApp">
+<head>
+<link
+	href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css"
+	rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/login1.css">
+<link rel="stylesheet" type="text/css" href="css/Bootswatch.css">
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+
+<title>Project Data Portal</title>
+</head>
+
+<body ng-controller="LoginController">
+<div>
+<nav class="navbar navbar-default">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="#" style="font-size: 40">Project Data Portal</a>
+                  </div>
+                </div>
+              </nav>
+</div>
+<div>
+<table class="table">
+<tr>
+<td width="20%">
+<div class="bs-component">
+              <ul class="nav nav-pills nav-stacked " ng-init="tab=1">
+                <li  
+                ng-click="onClickTab(1)" ng-class="{'cb-active': tab == 1}"><a>Home</a></li>
+                   <li  
+                ng-click="onClickTab(2)" ng-class="{'cb-active': tab == 2}"><a>About</a></li>
+                   <li  
+                ng-click="onClickTab(3)" ng-class="{'cb-active': tab == 3}"><a>Contact</a></li>
+              </ul>
+ </div>
+</td>
+
+<td width="45%">
+  <div id="mainView">
+            <div ng-include="tab"></div>
+        </div>
+		<div id="viewOne" class="well" ng-show="tab == 1">
+			<h2>Home</h2>
+			<p class="text-success">This is <strong>Project Manager</strong> a perfect application
+					designed for managing your projects. This application enables you
+					to manage your project work efficiently.</p>
+		</div>
+
+		<div id="viewTwo" class="well" ng-show="tab == 2">
+			<h2>About</h2>
+			<p class="text-success">User can view his projects and related work done. Very nice
+					application especially for managers to manage projects under them
+					and upload and download new data.</p>
+			<p>A perfect tool to manage your work.</p>
+		</div>
+
+	
+	
+		<div id="viewThree" class="well" ng-show="tab == 3">
+			<h2>Contact</h2>
+			<p class="text-success">Developer: Apurva Bakshi<br> Contact : 8234679980</p>
+		</div>
+
+</td>
+
+<td width="35%">
+<form class="form-horizontal" ng-submit="login(username, password)">
+  <fieldset>
+    <legend>Login</legend>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Username</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email" ng-model="username">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="password">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Submit</button>
+           <button type="reset" class="btn btn-default">Cancel</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</td>
+</tr>
+</table>
+</div>
+</body>
+
+	<script src="js/app.js"></script>
+			<script src="js/loginController.js"></script>
+
+</html>
+
+
+  
+

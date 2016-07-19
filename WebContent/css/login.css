@@ -1,0 +1,223 @@
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF url(images/img0110.png) repeat-x;
+
+  
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 13px;
+	color: #666666;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+input, textarea, select {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 13px;
+	color: #666666;
+}
+
+h1, h2{
+	margin: 0;
+	font-weight: normal;
+	color: #4F789F;
+}
+
+h1 {
+	letter-spacing: -1px;
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 1.8em;
+}
+
+p, ul{
+	margin-bottom: 1.6em;
+}
+
+blockquote {
+	font-style: italic;
+}
+
+a {
+	color: #4F789F;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+/* Header */
+
+#header {
+	background-image: url(images/gslab_logo.jpg) no-repeat  left top;
+	width: 900px;
+	height: 300px;
+	margin: 0 auto;
+	padding: 0 40px;
+	background: url(../../images/img03.jpg) no-repeat top;
+}
+
+img{
+	float:right;
+}
+/* Menu */
+
+#menu {
+	width: 900px;
+	height: 100px;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 25px 0;
+	list-style: none;
+}
+
+#menu li {
+	display: inline;
+}
+
+#menu a {
+	display: block;
+	float: left;
+	width: 150px;
+	height: 38px;
+	padding: 12px 0 0 0;
+	text-align: center;
+	text-decoration: none;
+	text-transform: lowercase;
+	font-size: 1.8em;
+}
+
+/*#menu .active a {
+	background: #B3EAFD url(images/img02.jpg) no-repeat;
+}*/
+
+/* Logo */
+
+#logo {
+	clear: both;
+	width: 900px;
+	height: 200px;
+}
+
+#logo h1{
+	text-transform: upper-latin;
+	font-style: italic;
+	padding: 70px 0 0 0;
+	font-size: 4em;
+
+}
+#logo h2 {
+	text-transform: lowercase;
+	font-style: italic;
+	padding: 0 0 0 100px;
+	font-size: 2em;
+
+}
+
+#logo a {
+	text-decoration: none;
+	color: #479EF3;
+}
+
+/* Page */
+
+#page {
+background: #FFFFFF url(images/lineblue.png) repeat-x;
+	width: 900px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+
+/* Content */
+
+#content {
+	float: left;
+	width: 580px;
+}
+
+.post {
+}
+
+.post .meta {
+	margin: 0 0 0 0;
+	color: #B2B7C4;
+}
+
+.post .entry {
+	padding: 20px 0;
+	line-height: 200%;
+}
+
+.post .entrys{
+	padding: 20px 0;
+	line-height: 200%;
+	color:#4F789F;
+}
+
+/* Sidebar */
+
+#sidebar {
+	float: right;
+	width: 280px;
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#sidebar li {
+	margin-bottom: 20px;
+	padding: 20px 20px 40px 20px;
+	background: url(images/img04.jpg) no-repeat;
+	
+}
+label.si{
+    font-size: 15px;
+	  font-style: italic;
+color: #4F789F;
+}
+input.signup{
+position:relative;
+left: 50px;
+color: #4F789F;
+}
+
+#sidebar h2 {
+	margin-bottom: 20px;
+	text-transform: lowercase;
+	color: #4F789F;
+}
+
+#s {
+	width: 160px;
+}
+
+#x {
+		color: #4F789F;
+}
+/* Footer */
+
+#footer {
+	clear: both;
+	padding: 40px 0;
+	background: #EAF1F7;
+	border-top: 5px solid #A2C9EA;
+	text-align: center;
+}
+
+#footer p {
+	margin: 0;
+	color: #76AEDB;
+}
+
