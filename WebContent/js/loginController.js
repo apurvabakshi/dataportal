@@ -1,21 +1,28 @@
-app.controller('LoginController', ['$scope', function($scope) { 
+app.controller('LoginController', ['$scope','$http', function($scope,$http) { 
   $scope.title = 'Login App'; 
-$scope.tab=1;
+  $scope.tab=1;
+  $scope.serverip='localhost';
   
   $scope.login = function() {
-	//  alert("login method called");
-	    if ($scope.username === 'admin' && $scope.password === 'pass') {
-	    var name=$scope.username;
-	    	  window.location="Homepage.html?username=" + name;
-	      authentication.isAuthenticated = true;
-	      authentication.user = { name: $scope.username };
-	      alert("User authenticated");
-	      $scope.title = 'authenticated'; 
-	   
-	    } else {
-	      $scope.loginError = "Invalid username/password combination";
-	      console.log('Login failed..');
-	    };
+	  try{
+	    	  		  $http({method: "GET", 
+	    			     url:"http://"+$scope.serverip+":8080/dataportal/portal/user/authenticate/"+$scope.username+"/"+$scope.password,
+	    	  		  }).
+	    	        success(function(data, status, headers, config) {
+	    	        	var jsontext = JSON.stringify(data);
+	    	        	var user = JSON.parse(jsontext);
+	    	        	if(user.sessionId!=null){
+	    	        		window.location="homepage1.html?userid=" + user.id;
+	    	        	}
+	    	        	else{
+	    	        		alert("Incorrect username or password!!");
+	    	        	}
+	    	        		}
+	    	        ).error(function(data, status, headers, config) {
+	    	        	alert("Service Unavailable:"+URL1);
+	    	        });
+		 }catch(e){document.write(e); alert("Exception");}
+	 
   };
  
 	 

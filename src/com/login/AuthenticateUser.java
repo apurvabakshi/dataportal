@@ -1,106 +1,79 @@
 package com.login;
 
-import java.util.Hashtable;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import javax.naming.AuthenticationException;
-import javax.naming.Context;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
-import javax.naming.directory.SearchControls;
-import javax.naming.directory.SearchResult;
+import com.projectoperations.Project;
+
+import com.utils.CassandraConnection;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 
-@Path("/helloworld")
+@Path("/user")
 public class AuthenticateUser {
 
+	Connection con=null;
+	CassandraConnection connection=new CassandraConnection();
+	
+	@Path("/authenticate/{username}/{password}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public User authenticate(@PathParam("username") String uname, @PathParam("password") String pwd) {
+		if(uname.equalsIgnoreCase("gs-077") && pwd.equalsIgnoreCase("pass")){
+			User user=new User();
+			user.setId(uname);
+			user.setSessionId("123");
+			user.setUsername(getName(uname));
+			return user;
+		}
+		return null;
+	}
+	
+	public String getName(String id){
+		try{
+		con=connection.getConnection();
+		Statement stmt = con.createStatement();
+		String query = "select name from employees where id='"+id+"';";
+		ResultSet result = stmt.executeQuery(query);
+		String username=result.getString("name");
+		return username;
+		}catch(Exception e){
+			
+		}
+		return null;
+	}
+	
 	@Path("/test")
 		@GET
 		@Produces(MediaType.TEXT_PLAIN)
 		public String sayPlainTextHello() {
 			return "Hello world!";
 		}
-
-	@Path("/{user}/{pass}")
+	
+	@Path("/newtest")
 	@GET
-	@Produces(
-		{ MediaType.TEXT_PLAIN })
-	public String authenticate(@PathParam("user") String name, @PathParam("pass") String pass1)
-	{
-		Hashtable<String, String> authEnv = new Hashtable<String, String>(11);
-		String userName = name;
-		String passWord = pass1;
-		String dn = "cn=" + userName + "," + Constants.LDAP_BASE;
-		String id;
-		String role="";
-		authEnv.put(Context.INITIAL_CONTEXT_FACTORY, Constants.LDAP_FACTORY);
-		authEnv.put(Context.PROVIDER_URL, Constants.LDAP_URL);
-		authEnv.put(Context.SECURITY_AUTHENTICATION, "simple");
-		authEnv.put(Context.SECURITY_PRINCIPAL, dn);
-		authEnv.put(Context.SECURITY_CREDENTIALS, passWord);
-
-		try
-		{
-			DirContext dctx = new InitialDirContext(authEnv);
+	@Produces(MediaType.APPLICATION_JSON)
+	public Project[] sayPlainTextHello1() {
+		Project[] p=new Project[2];
+		Project p0 = new Project();
+		p0.setId(1);
+		p0.setName("rsa");
+		p[0] = p0;
 		
-		    SearchControls sc = new SearchControls();
-		    String[] attributeFilter = {"cn","sn"};
-		    sc.setReturningAttributes(attributeFilter);
-		    sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
-		 
-		    String filter = "cn="+name;
-		    NamingEnumeration<SearchResult> results = dctx.search(Constants.LDAP_BASE,filter, sc);
-		      
-		   while (results.hasMore()) {
-		   
-			   SearchResult sr = (SearchResult) results.next();
-		      Attributes attrs = sr.getAttributes();
-		      Attribute temp=attrs.get("sn");
-		    	  role=(String)temp.get();
-		    	  System.out.print(role + " this is  " );
-		  
-		      } 
-			System.out.println("Authentication Success!");
-			SessionMap s = new SessionMap();
-			String check = s.checkIfLoggedIn(name);
-			if (check.equalsIgnoreCase("false"))
-			{
-				id = s.createSession(name);
-			}
-			else
-			{
-				String givenId[] = check.split(",");
-				id = givenId[0];
-				System.out.println("already present =" + id);
-			}
-			return "True=" + id + "=" + role;
-		}
-		catch (AuthenticationException authEx)
-		{
-
-			System.out.println("Authentication failed!");
-			return "False";
-
-		}
-		catch (NamingException namEx)
-		{
-
-			System.out.println("Something went wrong!");
-
-			namEx.printStackTrace();
-			return "False";
-		}
-
+		Project p1 = new Project();
+		p1.setId(1);
+		p1.setName("rsa");
+		p[1] = p1;
+		return p;
 	}
+	
 	
 }

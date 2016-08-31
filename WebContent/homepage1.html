@@ -1,0 +1,238 @@
+<html ng-app="homeapp">
+<head>
+<link
+	href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/homepagecustom.css">
+<link rel="stylesheet" type="text/css" href="css/Bootswatch.css">
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/homepageController.js"></script>
+<title>Welcome to Project Data Portal</title>
+</head>
+
+<body ng-controller="homepageController" data-ng-init="init()">
+
+	<div
+		style="background-image: url(./images/back1.png); height: 25%; width: 100%; background-repeat: no-repeat; background-size: 100%;">
+		<br> <br>
+		<h1 style="color: #18bc9c; margin-top: 0;">
+			<b>Project Data Portal</b>
+		</h1>
+	</div>
+	<a href="login1.html" class="pull-rightnew"> Welcome {{username}} !<strong>Logout</strong></a>
+	<div>
+		<table class="table">
+			<tr>
+				<td width="25%" style="background-color:#ecf0f1;">
+					<div class="bs-component">
+						<div class="form-group">
+							<table width="100%">
+								<thead font size=3>
+									<tr class="addspace">
+										<th style="text-align: center" colspan="2">Select Project
+											Details</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="addspaceunder">
+										<td width="40%"><label for="select" class="col-lg-2">Project
+												Name</label></td>
+										<td width="60%">
+											<div>
+												 <select class="form-control" id="select"  data-ng-model="projectname">
+												  <option value="">---Select---</option>
+													<option data-ng-repeat="p in projectList" value="{{p.projectName}}">{{p.projectName}}</option>
+												<!--	<select class="form-control" id="select" ng-model="projectname" ng-options="project as project.projectName for project in projectList" ng-change="GetProjectName()">-->
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr class="addspaceunder">
+										<td width="40%"><label for="select" class="col-lg-2">Month</label></td>
+										<td width="60%">
+											<div>
+												<select class="form-control" id="select" data-ng-model="projectmonth">
+												 	<option value="">---Select---</option>
+													<option selected value="january" >January</option>
+													<option value="february" >February</option>
+													<option value="march">March</option>
+													<option value="april">April</option>
+													<option value="may">May</option>
+													<option value="june">June</option>
+													<option value="july">July</option>
+													<option value="august">August</option>
+													<option value="september">September</option>
+													<option value="october">October</option>
+													<option value="november">November</option>
+													<option value="december">December</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr class="addspaceunder">
+										<td width="40%"><label for="select" class="col-lg-2">Year</label></td>
+										<td width="60%">
+											<div>
+												<select class="form-control" id="select" data-ng-model="projectyear">
+													<option value="">---Select---</option>
+													<option value="2015	">2015</option>
+													<option selected value="2016">2016</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+
+								</tbody>
+								<tfoot font size=3>
+									<tr class="addspaceabove">
+										<th style="text-align: center" colspan="2"><a href="#" class="btn btn-success" ng-click="getdetails()">Get Details</a></th>
+									</tr>
+								</tfoot>
+							</table>
+			</div>
+			</div>
+			</td>
+
+			<td width="75%">
+				<div class="col-lg-4 container">
+					<div class="bs-component">
+						<ul class="nav nav-tabs nav-pills menutab" ng-init="tab=1">
+							<li ng-click="onClickTab(1)" ng-class="{'cb-active': tab == 1}"><a>Skillset</a></li>
+							<li ng-click="onClickTab(2)" ng-class="{'cb-active': tab == 2}"><a>Timelines</a></li>
+							<li ng-click="onClickTab(3)" ng-class="{'cb-active': tab == 3}"><a>Updates</a></li>
+							<li ng-click="onClickTab(4)" ng-class="{'cb-active': tab == 4}"><a>Documents</a></li>
+							<li ng-click="onClickTab(5)" ng-class="{'cb-active': tab == 5}"><a>Reports</a></li>
+						</ul>
+						<div id="mainView">
+							<div ng-include="tab"></div>
+						</div>
+							<div class="well viewTab" ng-show="tab == 1">
+								<div class="bs-component">
+									<table class="table table-striped table-hover ">
+										<thead>
+											<tr class="warning">
+												<th>Operating System</th>
+												<th>Databases</th>
+												<th>Programming Languages</th>
+												<th>Development Environment</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr >
+												<td><li ng-repeat="o in osList">{{o.value}}</li></td>
+												<td><li ng-repeat="d in dbList">{{d.value}}</li></td>
+												<td><li ng-repeat="l in languageList">{{l.value}}</li></td>
+												<td><li ng-repeat="e in ideList">{{e.value}}</li></td>
+											</tr>
+										</tbody>
+									</table>
+									<div id="source-button" class="btn btn-primary btn-xs"
+										style="display: none;">&lt; &gt;</div>
+								</div>
+							</div>
+
+							<div class="well viewTab" ng-show="tab == 2">
+								<table class="table table-striped table-hover scroll-table"
+									style="width: 80%; height: 300px;" align="center">
+									<thead>
+										<tr class="warning">
+											<th style="width: 18%;">Date</th>
+											<th style="width: 18%;">Release Version</th>
+											<th style="width: 44%;">Features added/Removed</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="t in timelineList">
+										<td>{{t.date}}</td>
+										<td>{{t.release}}</td>
+										<td>{{t.feature}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="well viewTab" ng-show="tab == 3">
+							<div class="panel panel-warning"  style="width:80%; margin:0 auto;">
+									<div class="panel-heading">
+										<h3 class="panel-title">Project Updates for {{projectmonth}}, {{projectyear}}</h3>
+									</div>
+									<div class="panel-body">
+										<ol ng-repeat="p in updatesList" contenteditable='true' value={{p.value}}>
+											<input type="text" size="70" id="tab3text" value="{{p.value}}"
+								onfocus="this.oldvalue = this.value;"
+								onchange="angular.element(this).scope().editProjectUpdate(this);" />
+										</ol>
+									</div>
+								</div>
+							</div>
+
+							<div class="well viewTab" ng-show="tab == 4">
+								<div class="panel panel-warning"  style="width:50%; margin:0 auto;" align="center">
+									<div class="panel-heading">
+										<h3 class="panel-title">Download Documents</h3>
+									</div>
+									<div class="panel-body">
+									<ol>
+									<li ng-repeat="d in docList"><a ng-href="http://localhost:8080/dataportal/upload/{{projectname}}/{{d.name}}" download={{d.name}}>{{d.name}}</a></li>
+									</ol>
+									</div>
+								</div>
+								</br>
+								<div class="panel panel-warning"  style="width:50%; margin:0 auto;" align="center">
+									<div class="panel-heading">
+										<h3 class="panel-title">Upload Documents</h3>
+									</div>
+									<div class="panel-body">
+									<input type="file" file-model="myFile" id="fileName"/> </br>	<a href="#" class="btn btn-warning" ng-click="upload()">Upload</a>
+									{{status}}
+									</div>
+								</div>
+							</div>
+							
+							<div class="well viewTab" ng-show="tab == 5">
+								<div class="panel panel-warning"  style="width:50%; margin:0 auto;" align="center">
+									<div class="panel-heading">
+										<h3 class="panel-title">Generate Reports</h3>
+									</div>
+									<div class="panel-body">
+												<select class="form-control" id="select" data-ng-model="reporttype">
+													<option value="">---Select type---</option>
+													<option value="monthly">Monthly</option>
+												</select></br>
+													<select class="form-control" id="select" data-ng-model="reportformat">
+													<option value="">---Select format---</option>
+													<option value="pdf">PDF</option>
+													<option value="csv">CSV</option>
+													<option value="xlt">Excel</option>
+												</select></br>
+												<a href="#" class="btn btn-warning" ng-click="getreport()">Generate Report</a>
+												</br></br><a ng-href id="report1" download=report_{{projectmonth}}_{{projectyear}}.{{reportformat}} ng-show="link==1">Click Here to Download</a>
+									</div>
+								</div>
+							</div>
+
+
+					</div>
+				</div>
+
+			</td>
+
+			</tr>
+		</table>
+	</div>
+</body>
+
+<div class="footer">
+	<b>Copyright © 2016 GS Lab Pvt.Ltd</b>
+</div>
+
+
+
+</html>
+
+
+
+

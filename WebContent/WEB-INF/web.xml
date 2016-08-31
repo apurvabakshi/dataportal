@@ -9,19 +9,65 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
+
   <servlet>
-    <servlet-name>Jersey REST Service</servlet-name>
+    <servlet-name>Servlet Login</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>
         <param-name>com.sun.jersey.config.property.packages</param-name>
         <param-value>com.login</param-value>
     </init-param>
+      <init-param>
+    <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+    <param-value>true</param-value>
+</init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
+ <servlet>
+    <servlet-name>Servlet Projects</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+        <param-name>com.sun.jersey.config.property.packages</param-name>
+        <param-value>com.projectoperations</param-value>
+    </init-param>
+      <init-param>
+    <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+    <param-value>true</param-value>
+</init-param>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  
 
   <servlet-mapping>
-    <servlet-name>Jersey REST Service</servlet-name>
+    <servlet-name>Servlet Login</servlet-name>
     <url-pattern>/portal/*</url-pattern>
   </servlet-mapping> 
+  
+    <servlet-mapping>
+    <servlet-name>Servlet Projects</servlet-name>
+    <url-pattern>/project/*</url-pattern>
+  </servlet-mapping> 
+  
+   <servlet>
+    <description></description>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>com.utils.UploadServlet</servlet-class>
+  </servlet>
+  
+   <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/upload/UploadServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <servlet-name>ReportServlet</servlet-name>
+    <servlet-class>com.utils.ReportServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ReportServlet</servlet-name>
+    <url-pattern>/reports/ReportServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

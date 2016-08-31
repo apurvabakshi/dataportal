@@ -1,0 +1,71 @@
+.cb-active {
+    background-color: #2c3e50;
+}
+
+.footer-company-name {
+    color: #0CE3AC;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #2c3e50;
+  text-align: center;
+  color: #18bc9c;
+}
+
+.footer {
+    margin:0 auto;
+    height:auto;
+    overflow:hidden;
+    position: fixed;
+    bottom: 0px;
+}
+
+.pull-rightnew {
+  float: right !important;
+    margin-right: 25px;
+}
+
+.viewTab{
+	width:900px;
+}
+
+.menutab{
+	width:500px;
+}
+
+tr.addspace >th{
+	padding-bottom: 1em;
+}
+
+tr.addspaceunder >td{
+	padding-bottom: 1em;
+}
+
+
+tr.addspaceabove >th{
+	padding-top: 1em;
+}
+
+tr.scroll-table{
+	width: 100%;
+display: inline-table;
+}
+table.scroll-table{
+	 height:300px;
+}
+tbody.scroll-table{
+	overflow-y: scroll;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+}
+
+#tab3text {
+	border: 0;
+	background: transparent;
+}
